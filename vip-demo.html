@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Pass Demo | Parma Smart</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Helvetica Neue', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container { padding: 20px; }
+        .pass-card {
+            width: 300px;
+            height: 180px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            border-radius: 15px;
+            border: 1px solid #444;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .pass-card::after {
+            content: "VIP CLUB";
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #d4af37;
+        }
+        h1 { font-size: 1.5rem; margin-bottom: 10px; }
+        p { color: #888; margin-bottom: 30px; font-size: 0.9rem; }
+        .btn {
+            background-color: #fff;
+            color: #000;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .points {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .progress-bar {
+            width: 80%;
+            height: 4px;
+            background: #444;
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+        .progress-fill {
+            width: 60%;
+            height: 100%;
+            background: #d4af37;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Benvenuto nel Club</h1>
+        <p>Inquadra per salvare il tuo Pass nel Wallet.</p>
+        
+        <div class="pass-card">
+            <div style="font-size: 12px; color: #888;">IL TUO LOCALE</div>
+            <div class="points">1.250 Punti</div>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <div style="font-size: 10px; color: #d4af37;">PROSSIMO PREMIO: 75%</div>
+        </div>
+
+        <a href="#" class="btn" onclick="alert('In una versione reale, qui il Pass verrebbe aggiunto ad Apple o Google Wallet!')">
+            Aggiungi al Wallet
+        </a>
+    </div>
+</body>
+</html>
