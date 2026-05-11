@@ -3,90 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP Pass Demo | Parma Smart</title>
+    <title>VIP Pass Demo | Exclusive Club</title>
     <style>
+        :root {
+            --gold: #d4af37;
+            --dark-bg: #050505;
+            --card-grad: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+        }
+
         body {
-            background-color: #000;
+            background-color: var(--dark-bg);
             color: #fff;
-            font-family: 'Helvetica Neue', sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             text-align: center;
+            overflow-x: hidden;
         }
-        .container { padding: 20px; }
-        .pass-card {
-            width: 300px;
-            height: 180px;
-            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+
+        .container {
+            padding: 40px 20px;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        p {
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* QR CODE - Visibile solo su Desktop */
+        .qr-section {
+            background: #fff;
+            padding: 15px;
+            display: inline-block;
             border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        /* CARD PASS */
+        .pass-card {
+            width: 100%;
+            max-width: 320px;
+            height: 190px;
+            background: var(--card-grad);
+            border-radius: 20px;
             border: 1px solid #444;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            margin: 0 auto 40px auto;
             position: relative;
+            padding: 20px;
+            box-sizing: border-box;
         }
+
         .pass-card::after {
-            content: "VIP CLUB";
+            content: "VIP MEMBER";
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 20px;
+            right: 20px;
             font-size: 10px;
-            letter-spacing: 2px;
-            color: #d4af37;
+            letter-spacing: 3px;
+            color: var(--gold);
+            font-weight: bold;
         }
-        h1 { font-size: 1.5rem; margin-bottom: 10px; }
-        p { color: #888; margin-bottom: 30px; font-size: 0.9rem; }
+
+        .points {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .progress-container {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #444;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 65%;
+            height: 100%;
+            background: var(--gold);
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        /* BOTTONE - Visibile principalmente su Mobile */
         .btn {
             background-color: #fff;
             color: #000;
-            padding: 15px 30px;
+            padding: 18px 35px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
+            font-size: 1rem;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            transition: transform 0.2s ease;
         }
-        .points {
-            font-size: 24px;
-            font-weight: bold;
-            color: #fff;
+
+        .btn:hover {
+            transform: scale(1.05);
         }
-        .progress-bar {
-            width: 80%;
-            height: 4px;
-            background: #444;
-            margin: 0 auto;
-            border-radius: 2px;
+
+        /* LOGICA PER MOSTRARE/NASCONDERE QR CODE */
+        @media (max-width: 768px) {
+            .qr-section { display: none; }
+            .desktop-only { display: none; }
         }
-        .progress-fill {
-            width: 60%;
-            height: 100%;
-            background: #d4af37;
+
+        @media (min-width: 769px) {
+            .mobile-only { display: none; }
         }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>Benvenuto nel Club</h1>
-        <p>Inquadra per salvare il tuo Pass nel Wallet.</p>
+        <h1>Exclusive VIP Club</h1>
         
-        <div class="pass-card">
-            <div style="font-size: 12px; color: #888;">IL TUO LOCALE</div>
-            <div class="points">1.250 Punti</div>
-            <div class="progress-bar"><div class="progress-fill"></div></div>
-            <div style="font-size: 10px; color: #d4af37;">PROSSIMO PREMIO: 75%</div>
+        <p class="desktop-only">Inquadra il QR Code con la fotocamera del tuo iPhone o Android per scaricare la tessera demo.</p>
+        
+        <p class="mobile-only">Clicca il pulsante sotto per aggiungere istantaneamente la tua tessera VIP al Wallet.</p>
+
+        <div class="qr-section">
+            <img id="qr-img" src="" alt="Inquadra QR Code">
         </div>
 
-        <a href="#" class="btn" onclick="alert('In una versione reale, qui il Pass verrebbe aggiunto ad Apple o Google Wallet!')">
-            Aggiungi al Wallet
+        <div class="pass-card">
+            <div style="text-align: left;">
+                <div style="font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px;">Status Attuale</div>
+                <div class="points">1.250 Punti</div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div style="font-size: 11px; color: var(--gold); margin-top: 8px; text-align: right; font-weight: bold;">
+                    MANCANO 2 VISITE AL PREMIO
+                </div>
+            </div>
+        </div>
+
+        <a href="javascript:void(0)" class="btn" onclick="alert('In una versione reale, qui il file .pkpass verrebbe scaricato e aperto direttamente nel tuo Apple o Google Wallet!')">
+            <span>Aggiungi al Wallet</span>
         </a>
     </div>
+
+    <script>
+        // Genera automaticamente il QR Code basato sull'URL della pagina dove viene caricato
+        const currentUrl = window.location.href;
+        document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(currentUrl)}`;
+    </script>
+
 </body>
 </html>
